@@ -1,0 +1,30 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "NAME_1": "Lima",
+          "economic": "PBI: $90,000 millones",
+          "health": "Tasa de vacunación: 85%"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "NAME_1": "Cusco",
+          "economic": "PBI: $20,000 millones",
+          "health": "Tasa de vacunación: 78%"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[]]]
+        }
+      }
+    ]
+  }
+  

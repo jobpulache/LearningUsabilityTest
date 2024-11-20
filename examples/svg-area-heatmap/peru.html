@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mapa Interactivo de Perú</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha384-8LdrNtz+JSTjhaC9T8V62Un7wJ6pCFVx4zZt9EjlqK5PZl1pKToROjFTU/NHl2OT"
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha384-sA+QhHITiRm4sGg00nrO3QXnRCys/DVOZtVZjxd8Eh1MJThXj7cW19jvxO6F6p2v"
+      crossorigin=""
+    ></script>
+    <style>
+      #map {
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map = L.map('map').setView([-9.19, -75.0152], 5);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+      }).addTo(map);
+
+      fetch('peru_regions.geojson')
+        .then((response) => response.json())
+        .then((geojson) => {
+          function style(feature) {
+            return {
+              fillColor: '#4CAF50', 
+              weight: 2,
+              opacity: 1,
+              color: 'white',
+              fillOpacity: 0.7,
+            };
+          }
+
+          L.geoJson(geojson, {
+            style: style,
+            onEachFeature: function (feature, layer) {
+              layer.on('click', function () {
+                alert(
+                  `Región: ${feature.properties.NAME_1}\n` +
+                    `Indicador económico: ${feature.properties.economic}\n` +
+                    `Indicador de salud: ${feature.properties.health}`
+                );
+              });
+            },
+          }).addTo(map);
+        });
+    </script>
+  </body>
+</html>
